@@ -1,58 +1,20 @@
+import Timer from './Timer';
+
 export default (timerConfig) => {
-  const state = {
-    minutes: timerConfig.pomodoroLength || 25,
-    seconds: 0,
-    onBreak: false,
-    timerFinished: false,
-  };
-
-  const globalConfig = timerConfig;
-
-  let timer = null;
-
-  function configurePomodoroTimer() {
-
-    }
-
-  function configureBreakTimer(currState, config) {
-      currState.onBreak = true;
-      currState.minutes = config.breakLength || 5;
-      currState.seconds = 0;
-      currState.timerFinished = false;
-
-      return currState;
-    }
-
-  function updateTimer(currState) {
-        // update timer countdown based on input and return updated state
-    if (currState.seconds === 0 && currState.minutes > 0) {
-      currState.seconds = 59;
-      currState.minutes--;
-    } else if (currState.seconds > 0) {
-      currState.seconds--;
-    } else if (currState.minutes === 0 && currState.seconds === 0) {
-      if (currState.onBreak) {
-        currState.timerFinished = true;
-        } else {
-          currState = _configureBreakTimer(currState, globalConfig);
-        }
-    }
-
-    return currState;
-  }
+  const timer = Timer(timerConfig);
+  let interval = null;
 
   return {
-      start(callback) {
-        let currTimerState = _state;
+    start(callback) {
+      interval = setInterval(() => {
+        timer.updateMinutes().updateSeconds().checkStatus();
 
-        timer = setInterval(() => {
-          currTimerState = updateTimer(currTimerState);
-          callback(currTimerState);
+        callback(`${timer.state.minutes} min ${timer.state.seconds} sec remaining ${(!timer.state.onBreak) ? 'in Pomodoro' : 'on Break'}`);
 
-          if (currTimerState.timerFinished) {
-            clearInterval(timer);
-          }
-        }, 1000);
-      },
+        if (timer.state.finished) {
+          clearInterval(interval);
+        }
+      }, 1000);
+    },
   };
 };
