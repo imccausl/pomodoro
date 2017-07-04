@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "webpack",
-    "go": "node /mnt/c/Users/imcca/Projects/pomodoro/dist/bundle.js",
+    "go": "node ~/Projects/pomodoro/dist/bundle.js",
     "clean": "eslint --fix"
   },
   "author": "Ian McCausland",
