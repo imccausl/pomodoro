@@ -14,4 +14,9 @@ function Timer(model, callback) {
   return timer;
 }
 
+export function stopTimer(timer, callback) {
+  clearInterval(timer);
+  callback();
+}
+
 export default Timer;
