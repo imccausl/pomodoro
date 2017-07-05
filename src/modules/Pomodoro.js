@@ -1,12 +1,17 @@
 import TimerModel from './TimerModel';
-import Timer from './Timer';
+import Timer, { stopTimer } from './Timer';
 
 export default (timerConfig) => {
   const model = TimerModel(timerConfig);
-  const timer = Timer;
+  const makeTimer = Timer;
+  let timer = null;
+
   return {
     start(callback) {
-      timer(model, callback);
+      timer = makeTimer(model, callback);
     },
+    pause() {
+      stopTimer(timer, ()=>console.log('Timer Paused'));
+    }
   };
 };
