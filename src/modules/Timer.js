@@ -15,6 +15,7 @@ function setTimer(timerConfig = { pomodoroLength: 25, breakLength: 5 }, onBreak 
 function Timer(timerConfig) {
   return {
     state: setTimer(timerConfig),
+
     checkStatus() {
       if (this.state.minutes === 0 && this.state.seconds === 0) {
         if (this.state.onBreak) {

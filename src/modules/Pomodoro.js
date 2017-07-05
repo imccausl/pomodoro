@@ -9,10 +9,12 @@ export default (timerConfig) => {
       interval = setInterval(() => {
         timer.updateMinutes().updateSeconds().checkStatus();
 
-        callback(`${timer.state.minutes} min ${timer.state.seconds} sec remaining ${(!timer.state.onBreak) ? 'in Pomodoro' : 'on Break'}`);
-
         if (timer.state.finished) {
+          callback('Pomodoro Finished!');
           clearInterval(interval);
+        } else {
+          callback(`${timer.state.minutes} min ${timer.state.seconds} sec remaining ${(!timer.state.onBreak) ? 'in Pomodoro' : 'in Break'}`);
+
         }
       }, 1000);
     },
