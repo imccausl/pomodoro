@@ -11,7 +11,7 @@ export default (timerConfig) => {
       timer = makeTimer(model, callback);
     },
     pause() {
-      stopTimer(timer, ()=>console.log('Timer Paused'));
-    }
+      stopTimer(timer, () => console.log('Timer Paused'));
+    },
   };
 };
