@@ -4,10 +4,10 @@ const pomodoro = Pomodoro({ pomodoroLength: 1, breakLength: 1 });
 
 pomodoro.start(console.log);
 
-setTimeout(()=> {
+setTimeout(() => {
   pomodoro.pause();
 }, 2000);
 
-setTimeout(()=> {
+setTimeout(() => {
   pomodoro.start(console.log);
 }, 3000);
